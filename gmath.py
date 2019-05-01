@@ -31,9 +31,13 @@ def calculate_ambient(alight, areflect):
     ambient = []
     for x in range(3):
         ambient.append(alight[x]*areflect[x])
+    return ambient
 
 def calculate_diffuse(light, dreflect, normal):
-    pass
+    diffuse = []
+    for x in range(3):
+
+
 
 def calculate_specular(light, sreflect, view, normal):
     pass
