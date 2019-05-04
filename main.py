@@ -1,6 +1,6 @@
 from display import *
 from draw import *
-from parser import *
+from myparser import *
 from matrix import *
 import math
 
@@ -41,3 +41,5 @@ csystems = [ t ]
 
 
 parse_file( 'script', edges, polygons, csystems, screen, zbuffer, color, view, ambient, light, areflect, dreflect, sreflect)
+
+# get_lighting(normal, view, ambient, light, areflect, dreflect, sreflect)

@@ -28,6 +28,7 @@ def get_lighting(normal, view, ambient, light, areflect, dreflect, sreflect ):
 
     total = [ambi[x]+diff[x]+spec[x] for x in range(3)]
     total = limit_color(total)
+    # print(total)
     return total
 
 def calculate_ambient(alight, areflect):
@@ -38,22 +39,28 @@ def calculate_ambient(alight, areflect):
 
 def calculate_diffuse(light, dreflect, normal):
     diffuse = []
+    normalize(light[0])
     normalize(normal)
     for x in range(3):
-        diffuse.append(dreflect[x]*math.max(0, dot_product(normal, light[0]))*light[1][x])
+        diffuse.append(dreflect[x]*max(0, dot_product(normal, light[0]))*light[1][x])
     return diffuse
 
 
 def calculate_specular(light, sreflect, view, normal):
     specular = []
-    sum = [view[x]+light[x] for x in range(3)]
+    sum = [view[x]+light[0][x] for x in range(3)]
     normalize(sum)
     normalize(normal)
+
     for x in range(3):
-        specular.append(sreflect[x]*(dot_product(normal,sum))light[1][x])
+        specular.append(sreflect[x]*(dot_product(normal,sum))**SPECULAR_EXP*light[1][x])
+    print(specular)
+    return specular
 
 def limit_color(color):
+    # print(color)
     new = [int(x) if x < 255 else 255 for x in color]
+    return new
 
 #vector functions
 #normalize vetor, should modify the parameter
